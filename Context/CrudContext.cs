@@ -10,7 +10,6 @@ namespace CrudJWT.Context
 
         public CrudContext(DbContextOptions<CrudContext> options) : base(options)
         {
-            
         }
     }
 }
