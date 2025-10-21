@@ -5,10 +5,10 @@ namespace CrudJWT.Model
     public class ClientModel
     {
         public Guid Id { get; init; }
-        protected string FirstName;
-        protected string LastName;
-        protected int Age;
-        protected string PhoneNumber;
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public int Age { get; private set; }
+        public string PhoneNumber { get; private set; }
 
         public ClientModel()
         {
@@ -22,30 +22,6 @@ namespace CrudJWT.Model
             LastName = req.lastName;
             Age = req.age;
             PhoneNumber = req.phoneNumber;
-        }
-
-        public string firstName
-        {
-            get { return FirstName; }
-            set { FirstName = value; }
-        }
-
-        public string lastName
-        {
-            get { return LastName; }
-            set { LastName = value; }
-        }
-
-        public int age
-        {
-            get { return Age; }
-            set { Age = value; }
-        }
-
-        public string phoneNumber
-        {
-            get { return PhoneNumber; }
-            set { PhoneNumber = value; }
         }
     }
 }

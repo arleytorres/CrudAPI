@@ -33,7 +33,7 @@ namespace CrudJWT.Services
         public async Task<IEnumerable<ClientResponse>> GetAll()
         {
             var allClients = await context.Clients.ToListAsync();
-            return allClients.Select(x => new ClientResponse(x.Id, x.firstName, x.lastName, x.age, x.phoneNumber));
+            return allClients.Select(x => new ClientResponse(x.Id, x.FirstName, x.LastName, x.Age, x.PhoneNumber));
         }
 
         public async Task<ClientRequest> GetById(Guid id)
@@ -43,7 +43,7 @@ namespace CrudJWT.Services
             if (findClient is null)
                 throw new InvalidDataException("Nenhum cliente encontrado para o ID informado.");
 
-            return new ClientRequest(findClient.firstName, findClient.lastName, findClient.age, findClient.phoneNumber);
+            return new ClientRequest(findClient.FirstName, findClient.LastName, findClient.Age, findClient.PhoneNumber);
         }
 
         public async Task<Guid> Insert(ClientRequest req)
@@ -60,7 +60,7 @@ namespace CrudJWT.Services
             if (req.age < 18 || req.age > 120)
                 throw new ArgumentException("A idade informada é inválida.");
 
-            var findClient = await context.Clients.FirstOrDefaultAsync(x => x.firstName.Equals(req.firstName) && x.lastName.Equals(req.lastName));
+            var findClient = await context.Clients.FirstOrDefaultAsync(x => x.FirstName.Equals(req.firstName) && x.LastName.Equals(req.lastName));
 
             if (findClient is not null)
                 throw new InvalidDataException("Já existe um cliente com este nome cadastrado.");

@@ -31,15 +31,15 @@ namespace CrudJWT.Services
             if (string.IsNullOrEmpty(password) || password.Length <= 3)
                 throw new ArgumentException("A senha precisa ser definido.");
 
-            var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.username.Equals(username));
+            var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.Username.Equals(username));
 
             if (findLogin is null)
                 throw new InvalidOperationException("O username informado não existe.");
 
-            if (!BCrypt.Net.BCrypt.Verify(password, findLogin.password))
+            if (!BCrypt.Net.BCrypt.Verify(password, findLogin.Password))
                 throw new UnauthorizedAccessException("A senha é inválida.");
 
-            string token = GetToken(username, findLogin.role);
+            string token = GetToken(username, findLogin.Role);
 
             return token;
         }
@@ -63,7 +63,7 @@ namespace CrudJWT.Services
             if (!password.Equals(password2))
                 throw new ArgumentException("As senhas não são equivalentes.");
 
-            var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.username.Equals(username));
+            var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.Username.Equals(username));
 
             if (findLogin is not null)
                 throw new InvalidOperationException("Já existe uma conta com este username.");

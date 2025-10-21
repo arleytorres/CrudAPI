@@ -3,10 +3,10 @@
     public class LoginModel
     {
         public Guid Id { get; init; }
-        protected string Username;
-        protected string Password;
-        protected string Role;
-        protected string CreationTime;
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public string Role { get; private set; }
+        public string CreationTime { get; init; }
 
         public LoginModel()
         {
@@ -19,24 +19,6 @@
             Password = password;
             Role = role;
             CreationTime = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-        }
-
-        public string username
-        {
-            get { return Username; }
-            set { Username = value; }
-        }
-
-        public string password
-        {
-            get { return Password; }
-            set { Password = value; }
-        }
-
-        public string role
-        {
-            get { return Role; }
-            set { Role = value; }
         }
     }
 }
