@@ -1,6 +1,8 @@
 using CrudJWT.Context;
+using CrudJWT.Interfaces;
 using CrudJWT.Middlewares;
 using CrudJWT.Routes;
+using CrudJWT.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -9,6 +11,8 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<CrudContext>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ICrudService, CrudService>();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddProblemDetails();

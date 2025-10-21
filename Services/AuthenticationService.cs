@@ -36,7 +36,7 @@ namespace CrudJWT.Services
             if (findLogin is null)
                 throw new InvalidOperationException("O username informado não existe.");
 
-            if (!findLogin.password.Equals(password))
+            if (!BCrypt.Net.BCrypt.Verify(password, findLogin.password))
                 throw new UnauthorizedAccessException("A senha é inválida.");
 
             string token = await GetToken(username, findLogin.role);
@@ -68,7 +68,8 @@ namespace CrudJWT.Services
             if (findLogin is not null)
                 throw new InvalidOperationException("Já existe uma conta com este username.");
 
-            var login = new LoginModel(username, password, role);
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            var login = new LoginModel(username, hashedPassword, role);
             context.Logins.Add(login);
             await context.SaveChangesAsync();
         }
