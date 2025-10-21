@@ -12,11 +12,5 @@ namespace CrudJWT.Context
         {
             
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlite(builder.Configuration["Jwt:Key"]);
-            base.OnConfiguring(options);
-        }
     }
 }
