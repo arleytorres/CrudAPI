@@ -10,9 +10,13 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CrudContext>(options => options.UseSqlite(connectionString));
+
 builder.Services.AddScoped<CrudContext>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ICrudService, CrudService>();
+
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddProblemDetails();
@@ -67,7 +71,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
 {

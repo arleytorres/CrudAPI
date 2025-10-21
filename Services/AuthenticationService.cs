@@ -39,7 +39,7 @@ namespace CrudJWT.Services
             if (!BCrypt.Net.BCrypt.Verify(password, findLogin.password))
                 throw new UnauthorizedAccessException("A senha é inválida.");
 
-            string token = await GetToken(username, findLogin.role);
+            string token = GetToken(username, findLogin.role);
 
             return token;
         }
@@ -74,7 +74,7 @@ namespace CrudJWT.Services
             await context.SaveChangesAsync();
         }
 
-        private Task<string> GetToken(string username, string role)
+        private string GetToken(string username, string role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -101,7 +101,7 @@ namespace CrudJWT.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptior);
             var jwt = tokenHandler.WriteToken(token);
-            return Task.FromResult(jwt);
+            return jwt;
         }
     }
 }

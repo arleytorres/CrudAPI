@@ -30,10 +30,10 @@ namespace CrudJWT.Services
             return true;
         }
 
-        public async Task<List<ClientModel>> GetAll()
+        public async Task<IEnumerable<ClientResponse>> GetAll()
         {
             var allClients = await context.Clients.ToListAsync();
-            return allClients;
+            return allClients.Select(x => new ClientResponse(x.Id, x.firstName, x.lastName, x.age, x.phoneNumber));
         }
 
         public async Task<ClientRequest> GetById(Guid id)

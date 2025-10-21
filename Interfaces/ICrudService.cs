@@ -8,6 +8,6 @@ namespace CrudJWT.Interfaces
         Task<Guid> Insert(ClientRequest req);
         Task<bool> Delete(Guid id);
         Task<ClientRequest> GetById(Guid id);
-        Task<List<ClientModel>> GetAll();
+        Task<IEnumerable<ClientResponse>> GetAll();
     }
 }

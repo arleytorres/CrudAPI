@@ -8,9 +8,14 @@ namespace CrudJWT.Context
         public DbSet<LoginModel> Logins { get; set; }
         public DbSet<ClientModel> Clients { get; set; }
 
+        public CrudContext(DbContextOptions<CrudContext> options) : base(options)
+        {
+            
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("Data Source=database.sqlite");
+            options.UseSqlite(builder.Configuration["Jwt:Key"]);
             base.OnConfiguring(options);
         }
     }

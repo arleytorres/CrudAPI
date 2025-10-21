@@ -25,7 +25,7 @@ namespace CrudJWT.Middlewares
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "applicaation/json";
+                context.Response.ContentType = "application/json";
 
                 switch (ex)
                 {

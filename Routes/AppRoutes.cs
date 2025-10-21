@@ -51,7 +51,7 @@ namespace CrudJWT.Routes
             route.MapGet("getall", async (ICrudService service) =>
             {
                 var all = await service.GetAll();
-                return Results.Ok(all.Select(x => new { Id = x.Id, FirstName = x.firstName, LastName = x.lastName, Age = x.age, PhoneNumber = x.phoneNumber }));
+                return Results.Ok(all);
             });
         }
     }
