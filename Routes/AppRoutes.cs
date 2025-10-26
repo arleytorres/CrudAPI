@@ -4,6 +4,7 @@ using CrudJWT.DTOs;
 using CrudJWT.Interfaces;
 using CrudJWT.Services;
 using Microsoft.AspNetCore.Authorization;
+using MiniValidation;
 
 namespace CrudJWT.Routes
 {
@@ -15,12 +16,18 @@ namespace CrudJWT.Routes
 
             route.MapPost("login", async (LoginRequest req, IConfiguration config, IAuthenticationService service) =>
             {
+                if (!MiniValidator.TryValidate(req, out var errors))
+                    return Results.ValidationProblem(errors);
+
                 string result = await service.Login(req);
                 return Results.Ok(new { Status = "Success", Token = result });
             });
 
             route.MapPost("register", async (RegisterRequest req, IConfiguration config, IAuthenticationService service) =>
             {
+                if (!MiniValidator.TryValidate(req, out var errors))
+                    return Results.ValidationProblem(errors);
+
                 await service.Register(req);
                 return Results.Ok(new { Status = "Success" });
             });
@@ -32,6 +39,9 @@ namespace CrudJWT.Routes
 
             route.MapPost("insert", async (ClientRequest req, ICrudService service) =>
             {
+                if (!MiniValidator.TryValidate(req, out var errors))
+                    return Results.ValidationProblem(errors);
+
                 var id = await service.Insert(req);
                 return Results.Ok(new { Result = "Cliente cadastrado com sucesso!", ClientId = id });
             });

@@ -43,23 +43,11 @@ namespace CrudJWT.Services
             if (findClient is null)
                 throw new InvalidDataException("Nenhum cliente encontrado para o ID informado.");
 
-            return new ClientRequest(findClient.FirstName, findClient.LastName, findClient.Age, findClient.PhoneNumber);
+            return new ClientRequest { firstName = findClient.FirstName, lastName = findClient.LastName, age = findClient.Age, phoneNumber = findClient.PhoneNumber };
         }
 
         public async Task<Guid> Insert(ClientRequest req)
         {
-            if (string.IsNullOrEmpty(req.firstName) || req.firstName.Length <= 3)
-                throw new ArgumentException("O nome do cliente precisa ser definido.");
-
-            if (string.IsNullOrEmpty(req.lastName) || req.lastName.Length <= 3)
-                throw new ArgumentException("O sobrenome do cliente precisa ser definido.");
-
-            if (string.IsNullOrEmpty(req.phoneNumber) || req.phoneNumber.Length != 11)
-                throw new ArgumentException("O número de celular informado é inválido. [válido: DD+numero]");
-
-            if (req.age < 18 || req.age > 120)
-                throw new ArgumentException("A idade informada é inválida.");
-
             var findClient = await context.Clients.FirstOrDefaultAsync(x => x.FirstName.Equals(req.firstName) && x.LastName.Equals(req.lastName));
 
             if (findClient is not null)

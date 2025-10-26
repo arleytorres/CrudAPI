@@ -25,12 +25,6 @@ namespace CrudJWT.Services
             string username = req.username.Trim();
             string password = req.password.Trim();
 
-            if (string.IsNullOrEmpty(username) || username.Length <= 3)
-                throw new ArgumentException("O username precisa ser definido.");
-
-            if (string.IsNullOrEmpty(password) || password.Length <= 3)
-                throw new ArgumentException("A senha precisa ser definido.");
-
             var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.Username.Equals(username));
 
             if (findLogin is null)
@@ -48,20 +42,7 @@ namespace CrudJWT.Services
         {
             string username = req.username.Trim();
             string password = req.password.Trim();
-            string password2 = req.confirm_password.Trim();
             string role = req.role.Trim();
-
-            if (string.IsNullOrEmpty(username) || username.Length <= 3)
-                throw new ArgumentException("O username precisa ser definido.");
-
-            if (string.IsNullOrEmpty(password) || password.Length <= 3)
-                throw new ArgumentException("A senha precisa ser definido.");
-
-            if (string.IsNullOrEmpty(role) || role.Length <= 3)
-                throw new ArgumentException("A role precisa ser definido.");
-
-            if (!password.Equals(password2))
-                throw new ArgumentException("As senhas não são equivalentes.");
 
             var findLogin = await context.Logins.FirstOrDefaultAsync(x => x.Username.Equals(username));
 
