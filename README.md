@@ -34,7 +34,7 @@ Este repositório contém o código-fonte de uma API para gerenciamento de clien
 ## 🚀 Como Rodar
 ```bash
 # 1. Clone este repositório
-$ git clone [https://github.com/seu-usuario/CrudAPI.git](https://github.com/seu-usuario/CrudAPI.git)
+$ git clone [https://github.com/arleytorres/CrudAPI.git](https://github.com/arleytorres/CrudAPI.git)
 
 # 2. Navegue até o diretório do projeto
 $ cd CrudAPI
